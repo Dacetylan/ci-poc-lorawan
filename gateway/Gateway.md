@@ -1,5 +1,7 @@
 # LoRaWAN Gateway
 
+<img src="./pictures/.png" alt="Gateway photo" width="100%">
+
 ## Introduction
 
 To setup the LoRaWAN network with The Things Network (TTN) a gateway is needed.
@@ -55,10 +57,6 @@ When the writing has finished, insert the SD-card in the SD-card slot in the RPi
 The RPi will now start automatically.
 Do not disconnect the power supply while the RPi is running. This can damage the RPi and the SD-card.
 
-The gateway on the roof is configured as:
-- hostname: ttn-gw
-- username: admin
-- password: apkist
 
 ### Connecting to the RPi
 
@@ -71,10 +69,13 @@ The easiest way to connect to your RPi with SSH is by using the hostname.
 However be aware this option might not always work due to multiple RPi's connected to the network having the same hostname.
 
 1. Plug in the power supply and connect the RPi to a router with an ethernet cable, or if you configured the WiFi it should connect automatically.
-2. Open a console and type: ssh [username]@[hostname]
-	>>eg.: ssh admin@ttn-gw
-3. When connecting for the first time on an ip-addres you will be asked if you want to connect. Type "yes" to add the RPi to the list of known hosts.
+2. Open a console and type: `ssh [username]@[hostname]`
+	```bash
+	ssh admin@ttn-gw
+	```
+3. When connecting for the first time on an ip-addres you will be asked if you want to connect. Type `yes` to add the RPi to the list of known hosts.
 
+<img src="./pictures/ssh_fingerprint.png" alt="" width="100%">
 
 #### SSH with ip-addres
 
@@ -82,27 +83,30 @@ If connecting with the hostname doesn't work, or there are multiple RPi's with t
 To find it we are using <a href="https://nmap.org/download">Nmap Zenmap GUI</a>. (You can also use nmap in the console.)
 
 1. Plug in the power supply and connect the RPi to a router with an ethernet cable, or if you configured the WiFi it should connect automatically.
-2. On Windows, open "cmd" and run "ipconfig" to identify what ip-address your computer received and take note.
-2. Open Zenmap.
-3. In the Command line write "nmap -p 22" and the network range your ip-address falls into.
-	>> "-p 22" scan port 22 which is the port used for SSH.
+2. On Windows, open `cmd` and run `ipconfig"` to identify what ip-address your computer received and take note.
+	>> <img src="./pictures/ipconfig.png" alt="" width="100%">
+3. Open Zenmap.
+4. In the Command line write `nmap -p 22` and the network range your ip-address falls into.
+	>> `-p 22` scan port 22 which is the port used for SSH.
 	>> Example: my computer got ip-address 192.168.100.170
-	>> So the nmap command is: nmap -p 22 192.168.100.0/24
-4. Identify the RPi in the scan results.
+	>> So the nmap command is: `nmap -p 22 192.168.100.0/24`
+	>> <img src="./pictures/nmap.png" alt="" width="100%">
+5. Identify the RPi in the scan results.
 	>> With the MAC addresses you can identify any RPi's in the network because it starts with the manufacturers identification.
 	>> Zenmap does this for us and says which is a RPi.
 	>> The ip-address is given above the MAC address! Write down both addresses. We will need the MAC address later on.
-5. Now that we have the ip-address, open a Git Bash console.
-6. Type the command: ssh [username]@[ip-addres]
-	>> In our example: ssh admin@192.168.100.102
-7. When connecting for the first time on an ip-addres you will be asked if you want to connect. Type "yes" to add the RPi to the list of known hosts.
+6. Now that we have the ip-address, open a Git Bash console.
+7. Type the command: `ssh [username]@[ip-addres]`
+	>> In our example: `ssh admin@192.168.100.102`
+8. When connecting for the first time on an ip-addres you will be asked if you want to connect. Type `yes` to add the RPi to the list of known hosts.
+
 
 Congratulations! You ar now connected to your Raspberry Pi and can start using it.
 To make things easier in the future you can also set a static ip-addres for your RPi.
 This way the ip-addres is always the same. You can follow <a href="https://www.makeuseof.com/raspberry-pi-set-static-ip/">this guide</a> to set it up.
 
 TIP: It is recommanded to run an update every time you start your RPi.
-To do this type the following command: "sudo apt-get update && sudo apt-get -y upgrade".
+To do this type the following command: `sudo apt-get update && sudo apt-get -y upgrade`
 
 ---
 
@@ -120,11 +124,11 @@ In addition to security, the protocol allows for LNS discovery and load sharing 
 
 We are going to clone Basic Station from its GitHub repository and build and executable on our target RPi.
 
-1. Connect to your RPi console: ssh admin@192.168.100.102
-2. Run an update: sudo apt-get update && sudo apt-get -y upgrade
-3. Clone the repository: git clone https://github.com/lorabasics/basicstation.git
-4. Open the created directory: cd basicstation
-5. Build the executable: make platform=rpi variant=std
+1. Connect to your RPi console: `ssh admin@192.168.100.102`
+2. Run an update: `sudo apt-get update && sudo apt-get -y upgrade`
+3. Clone the repository: `git clone https://github.com/lorabasics/basicstation.git`
+4. Open the created directory: `cd basicstation`
+5. Build the executable: `make platform=rpi variant=std`
 
 During the build process, dependencies such as mbed TLS and the libloragw SX1301/SX1302 Driver/HAL are downloaded and compiled.
 
@@ -136,17 +140,20 @@ Do note the available options and where they are located in the menu can vary by
 
 1. Go to the RPi configuration screen: sudo raspi-config
 2. Select 3 Interface Options with the Up/Down keys.
+	>> <img src="./pictures/raspi-config_3.png" alt="" width="100%">
 3. Select I4 SPI and when promted select "Enable".
+	>> <img src="./pictures/raspi-config_I4.png" alt="" width="100%">
 4. Also under 3 Interface Options, select I6 Serial Port.
+	>> <img src="./pictures/raspi-config_I6.png" alt="" width="100%">
 5. When prompted answer "No" to disable shell messages, but leave the serial port enabled by answering "Yes" on the second prompt.
 6. Select "Finish" with the Left/Right keys to exit raspi-config.
 
 To be able to connect to TTN we need a couple of configuration files.
 To keep them together create a new folder called TTN in the home directory.
 
-1. cd ~
-2. mkdir TTN
-3. cd TTN
+1. `cd ~`
+2. `mkdir TTN`
+3. `cd TTN`
 
 #### tc.uri
 
@@ -156,8 +163,8 @@ For Europe and Africa the best current option is Europe 1: eu1.cloud.thethings.n
 After comes the port number. Packet transport with the The Things Network V3 LNS happens on port 8887.
 To create the file:
 
-1. To create the file and open it in the nano editor type: nano tc.uri
-2. In nano type: wss://eu1.cloud.thethings.network:8887
+1. To create the file and open it in the nano editor type: `nano tc.uri`
+2. In nano type: `wss://eu1.cloud.thethings.network:8887`
 3. Press Ctrl+O and Enter to save the file.
 4. Press Ctrl+X to exit the nano editor.
 
@@ -166,41 +173,50 @@ To create the file:
 
 Next we need to establish a trust relationship. This involves copying the root certificate (expires Jun 2035) to a file called tc.trust.
 
-1. curl https://letsencrypt.org/certs/isrgrootx1.pem.txt -o tc.trust
+1. `curl https://letsencrypt.org/certs/isrgrootx1.pem.txt -o tc.trust`
 
 #### tc.key
 
 We also need an API key from TTN for authorisation by registering the gateway.
-For this we need the gateway/station's EUI, which is it's MAC address with "FF:FE" added in the middle.
-In our example the MAC address is "B8:27:EB:4D:56:2F", so the EUI is "B8:27:EB:FF:FE:4D:56:2F".
+For this we need the gateway/station's EUI, which is it's MAC address with `FF:FE` added in the middle.
+In our example the MAC address is `B8:27:EB:4D:56:2F`, so the EUI is `B8:27:EB:FF:FE:4D:56:2F`.
 
 Now that we have the EUI we can head over to the TTN Console for registration.
 
 1. Open a browser on your computer and go to: https://eu1.cloud.thethings.network/console
 2. On the login page login to your account or create a new user by clicking on "Register".
+	>> <img src="./pictures/TTNConsole_login.png" alt="" width="100%">
+	>> <img src="./pictures/TTNConsole_create-user.png" alt="" width="100%">
 3. Once logged in, select "Go to gateways".
+	>> <img src="./pictures/TTNConsole_start.png" alt="" width="100%">
 4. If you are a collaborator on any gateways you can see them on this page. To add a new one select "Add gateway" on the top right.
+	>> <img src="./pictures/TTNConsole_gateway.png" alt="" width="100%">
 5. Fill in a Gateway ID of your choice. Make sure it is easily identifiable by this name.
 6. Fill in the Gateway EUI.
 7. Fill in a name. This is only as heading in the console.
 8. Scroll down to Frequency plan under LoRaWAN options and select the frequency your end devices/nodes will work on. In this example this is "Europe 863-870 MHz (SF9 for RX2 - recommended)
 9. The other settings can be left on default. Click on "Create gateway" to finish the registration.
+	>> <img src="./pictures/TTNConsole_gateway-add.png" alt="" width="100%">
 
 Your gateway is now registered, but we still need to get an API key for authorisation.
 
 1. In your browser go to: https://eu1.cloud.thethings.network/console/gateways
 2. Select your gateway.
 3. On the "Overview" page, select "API keys" on the left side panel.
+	>> <img src="./pictures/TTNConsole_gateway-overview.png" alt="" width="100%">
 4. Click on "Add API key" on the top right to create a new key.
+	>> <img src="./pictures/TTNConsole_gateway-apikeys.png" alt="" width="100%">
 5. Give the key a name.
 6. And add at least the following right: "Link as Gateway to a Gateway Server for traffic exchange, i.e. write uplink and read downlink".
+	>> <img src="./pictures/TTNConsole_gateway-apikeys-add.png" alt="" width="100%">
 7. Click on "Create API key".
 8. In the following window make sure to copy the key and write it down somewhere. You will not be able to get it later on, though you can always create a new one.
+	>> <img src="./pictures/TTNConsole_gateway-apikeys-copy.png" alt="" width="100%">
 
 Now head back over to the Git Bash console and enter the following commands:
 
-1. export LNS_KEY="your-API-key-here"
-2. echo "Authorization: Bearer $LNS_KEY" | perl -p -e 's/\r\n|\n|\r/\r\n/g' > tc.key
+1. `export LNS_KEY="your-API-key-here"`
+2. `echo "Authorization: Bearer $LNS_KEY" | perl -p -e 's/\r\n|\n|\r/\r\n/g' > tc.key`
 
 #### station.conf
 
@@ -208,7 +224,7 @@ Finally create the station's configuration file.
 
 1. To create the file: nano station.conf
 2. Add the following code to the file:
-<pre v-pre data-lang="bash"><code class="lang-bash">
+```bash
 {
    "radio_conf": {                  /* Actual channel plan is controlled by the server */
        "lorawan_public": true,      /* is default */
@@ -235,7 +251,7 @@ Finally create the station's configuration file.
      "log_rotate":  3
    }
 }
-</code>::after</pre>
+```
 
 You can find out more about what this file does in <a href="https://lora-developers.semtech.com/build/software/lora-basics/lora-basics-for-gateways/?url=conf.html">the official Semtech documentation.</a>
 
@@ -258,10 +274,10 @@ We, for instance, had some difficulty with finding the correct one.
 
 #### reset_lgw.sh
 
-1. In the TTN folder create the new file: nano reset_lgw.sh
+1. In the TTN folder create the new file: `nano reset_lgw.sh`
 2. Copy the code into the nano editor.
 
-<pre v-pre data-lang="bash"><code class="lang-bash">
+```bash
 #!/bin/sh
 
 # This script is intended to be used on IoT Starter Kit platform, it performs
@@ -324,11 +340,11 @@ case "$1" in
 esac
 
 exit 0
-</code>::after</pre>
+```
 
 3. Save and exit using Ctrl+O and Ctrl+X.
-4. To run this file needs root permissions, to add these run: chmod +x reset_lgw.sh
-5. Now to perform the reset: sudo ./reset_lgw.sh start 25
+4. To run this file needs root permissions, to add these run: `chmod +x reset_lgw.sh`
+5. Now to perform the reset: `sudo ./reset_lgw.sh start 25`
 
 ---
 
@@ -342,21 +358,21 @@ We are going to use a bash script and make it run at boot using crontab.
 1. In the TTN folder create the new file: nano start.sh
 2. Add the following code to the script:
 
-<pre v-pre data-lang="bash"><code class="lang-bash">
+```bash
 #!/bin/bash
 apt-get update && apt-get -y upgrade
 /home/admin/TTN/reset_lgw.sh start 25
 /home/admin/basicstation/build-rpi-std/bin/station --home=/home/admin/TTN --log-file=station.log --daemon
-</code>::after</pre>
+```
 
 	>> This script first performs an update, so we don't have to do this ourselves.
-	>> Afterwards it will perform a reset and start Basic Station as a daemon which logs to the file "station.log".
+	>> Afterwards it will perform a reset and start Basic Station as a daemon which logs to the file `station.log`.
 	
-3. Add root permissions to the script: chmod +x start.sh
-4. To open/create a crontab file as root type: sudo crontab -e
-5. At the bottom of the file add: @reboot sudo /home/admin/TTN/start.sh
-6. Reboot the RPi and the script should run automatically: sudo reboot
-7. When rebooted and reconnected through SSH you can read the log file with: sudo tail -f /home/admin/TTN/station.log
+3. Add root permissions to the script: `chmod +x start.sh`
+4. To open/create a crontab file as root type: `sudo crontab -e`
+5. At the bottom of the file add: `@reboot sudo /home/admin/TTN/start.sh`
+6. Reboot the RPi and the script should run automatically: `sudo reboot`
+7. When rebooted and reconnected through SSH you can read the log file with: `sudo tail -f /home/admin/TTN/station.log`
 8. To escape the logging press Ctrl+C.
 
 You can also check if the gateway is connected to TTN in the <a href="https://eu1.cloud.thethings.network/console/gateways">TTN Console's Gateways page</a>.
@@ -399,17 +415,17 @@ A short guide and a few changes can be found <a href="https://raspberrypi.stacke
 ### Create a backup
 
 1. Download the tool, extract and transfer it onto the RPi. This can be done using FileZilla.
-2. Make all script executable: chmod +x image-backup image-chroot image-info image-set-partuuid image-check image-compare image-mount image-shrink
+2. Make all script executable: `chmod +x image-backup image-chroot image-info image-set-partuuid image-check image-compare image-mount image-shrink`
 3. Format the USB-stick in exFAT and insert in the RPi.
-4. Mount USB-stick: sudo mount /dev/sda1 /mnt/Image/
-5. Start initial backup: sudo image-utils/image-backup
-6. Image file to create?: /mnt/Image/GatewayBackup.img
+4. Mount USB-stick: `sudo mount /dev/sda1 /mnt/Image/`
+5. Start initial backup: `sudo image-utils/image-backup`
+6. Image file to create?: `/mnt/Image/GatewayBackup.img`
 7. Initial image file ROOT filesystem size (MB) [2205]?: This can be 0 for smallest possible or blank for full backup.
 8. Added space for incremental updates after shrinking (MB) [0]?: Leave empty.
-9. Create /mnt/Image/BusterBackup.img (y/n)?: y
-10. After the backup is done you can make it smaller by compressing it: sudo gzip -9kN /mnt/Image/GatewayBackup.img
+9. Create /mnt/Image/BusterBackup.img (y/n)?: `y`
+10. After the backup is done you can make it smaller by compressing it: `sudo gzip -9kN /mnt/Image/GatewayBackup.img`
 
-To make an incremental backup later on you can use: sudo image-utils/image-backup /mnt/Image/GatewayBackup.img
+To make an incremental backup later on you can use: `sudo image-utils/image-backup /mnt/Image/GatewayBackup.img`
 
 ### Restoring a backup
 
@@ -418,9 +434,9 @@ Click on "Choose OS", scroll to the bottom, select "Use own file" and navigate t
 
 Or you can use the Image File Utilities again to mount the image from the USB-stick straight onto the RPi.
 
-1. Insert and mount the USB-stick: sudo mount /dev/sda1 /mnt/Image/
-2. Mount backup: sudo image-utils/image-mount /mnt/Image/GatewayBackup.img  MountedImages
-3. When done, run: sudo umount MountedImages; sudo losetup -d /dev/loop0
+1. Insert and mount the USB-stick: `sudo mount /dev/sda1 /mnt/Image/`
+2. Mount backup: `sudo image-utils/image-mount /mnt/Image/GatewayBackup.img  MountedImages`
+3. When done, run: `sudo umount MountedImages; sudo losetup -d /dev/loop0`
 
 https://behind-the-scenes.net/sharing-a-raspberry-pi-directory-on-a-local-area-network/
 
