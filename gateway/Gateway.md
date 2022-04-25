@@ -110,6 +110,7 @@ To find it we are using <a href="https://nmap.org/download">Nmap Zenmap GUI</a>.
 Congratulations! You ar now connected to your Raspberry Pi and can start using it.
 To make things easier in the future you can also set a static ip-addres for your RPi.
 This way the ip-addres is always the same. You can follow <a href="https://www.makeuseof.com/raspberry-pi-set-static-ip/">this guide</a> to set it up.
+Be aware this can sometimes create issues in the local network when the ip-addres is already taken.
 
 TIP: It is recommanded to run an update every time you start your RPi.
 To do this type the following command: `sudo apt-get update && sudo apt-get -y upgrade`
@@ -430,6 +431,8 @@ Other issues:
 - Is SPI enabled in raspi-config?
 - Correct SPI device (/dev/spidev0.0) specified in the "station.config" file?
 - Does the LoRa concentrator module have enough power?
+- If the gateway can't connect to TTN check the internet connection.
+	>> While working on this project an issue occurred where the RPi was connected to the network and accessible through SSH, but didn't get internet.
 
 
 ---
