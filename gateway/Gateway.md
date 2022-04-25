@@ -1,6 +1,6 @@
 # LoRaWAN Gateway
 
-<img src="./pictures/.png" alt="Gateway photo" width="100%">
+<img src="./pictures/gateway.png" alt="Gateway photo" width="100%">
 
 ## Introduction
 
@@ -25,6 +25,7 @@ In this example we are using:
 - Raspberry Pi 2 model B
 - <a href="https://wireless-solutions.de/products/lora-solutions-by-imst/radio-modules/ic880a-spi/">IMST iC880A LoRaWAN Concentrator 868MHz</a>
 
+
 ### Software Tools
 
 These aren't mandatory but can be very handy and are used in this example.
@@ -35,6 +36,7 @@ These aren't mandatory but can be very handy and are used in this example.
 
 If you are using Linux or MacOS you can use the build in command line console when needed.
 In Windows you can use the build in Windows PowerShell console or the above mentioned Git Bash. The later is a Linux based command line console which has some benefits over PowerShell.
+
 
 ---
 
@@ -63,6 +65,7 @@ Do not disconnect the power supply while the RPi is running. This can damage the
 There are a few different option to connect to the RPi.
 Because this is a headless setup, meaning you don't have a Graphical User Interface, we are using SSH in a console.
 
+
 #### SSH with Hostname
 
 The easiest way to connect to your RPi with SSH is by using the hostname.
@@ -77,6 +80,7 @@ However be aware this option might not always work due to multiple RPi's connect
 
 <img src="./pictures/ssh_fingerprint.png" alt="" width="100%">
 
+
 #### SSH with ip-addres
 
 If connecting with the hostname doesn't work, or there are multiple RPi's with the same hostname, we can also connect using the ip-addres.
@@ -84,13 +88,15 @@ To find it we are using <a href="https://nmap.org/download">Nmap Zenmap GUI</a>.
 
 1. Plug in the power supply and connect the RPi to a router with an ethernet cable, or if you configured the WiFi it should connect automatically.
 2. On Windows, open `cmd` and run `ipconfig"` to identify what ip-address your computer received and take note.
+	>>
 	>> <img src="./pictures/ipconfig.png" alt="" width="100%">
 3. Open Zenmap.
 4. In the Command line write `nmap -p 22` and the network range your ip-address falls into.
 	>> `-p 22` scan port 22 which is the port used for SSH.
 	>> Example: my computer got ip-address 192.168.100.170
 	>> So the nmap command is: `nmap -p 22 192.168.100.0/24`
-	>> <img src="./pictures/nmap.png" alt="" width="100%">
+	>>
+	>> <img src="./pictures/nmap.png" alt="" width="50%">
 5. Identify the RPi in the scan results.
 	>> With the MAC addresses you can identify any RPi's in the network because it starts with the manufacturers identification.
 	>> Zenmap does this for us and says which is a RPi.
@@ -108,6 +114,7 @@ This way the ip-addres is always the same. You can follow <a href="https://www.m
 TIP: It is recommanded to run an update every time you start your RPi.
 To do this type the following command: `sudo apt-get update && sudo apt-get -y upgrade`
 
+
 ---
 
 ## Configuring the Gateway
@@ -119,6 +126,7 @@ Basic Station exchanges data as JSON encoded objects over secure WebSockets.  Th
 In addition to security, the protocol allows for LNS discovery and load sharing and also includes CUPS or Configuration and Update Server allowing for easy management of gateway fleets.
 
 >> This section is largely based on <a href="https://www.beyondlogic.org/lorawan-upgrading-to-basic-station-and-the-things-network-v3-stack/">LoRaWAN: Upgrading to Basic Station and The Things Network V3 Stack by Craig Peacock</a>
+
 
 ### Installation
 
@@ -132,6 +140,7 @@ We are going to clone Basic Station from its GitHub repository and build and exe
 
 During the build process, dependencies such as mbed TLS and the libloragw SX1301/SX1302 Driver/HAL are downloaded and compiled.
 
+
 ### Configuration
 
 The RPi communicates with the Concentrator over SPI. However this is disable by default.
@@ -140,10 +149,13 @@ Do note the available options and where they are located in the menu can vary by
 
 1. Go to the RPi configuration screen: sudo raspi-config
 2. Select 3 Interface Options with the Up/Down keys.
+	>>
 	>> <img src="./pictures/raspi-config_3.png" alt="" width="100%">
 3. Select I4 SPI and when promted select "Enable".
+	>>
 	>> <img src="./pictures/raspi-config_I4.png" alt="" width="100%">
 4. Also under 3 Interface Options, select I6 Serial Port.
+	>>
 	>> <img src="./pictures/raspi-config_I6.png" alt="" width="100%">
 5. When prompted answer "No" to disable shell messages, but leave the serial port enabled by answering "Yes" on the second prompt.
 6. Select "Finish" with the Left/Right keys to exit raspi-config.
@@ -155,6 +167,8 @@ To keep them together create a new folder called TTN in the home directory.
 2. `mkdir TTN`
 3. `cd TTN`
 
+
+---
 #### tc.uri
 
 The first thing Basic Station needs to know is which LNS to connect with.
@@ -169,12 +183,15 @@ To create the file:
 4. Press Ctrl+X to exit the nano editor.
 
 
+---
 #### tc.trust
 
 Next we need to establish a trust relationship. This involves copying the root certificate (expires Jun 2035) to a file called tc.trust.
 
 1. `curl https://letsencrypt.org/certs/isrgrootx1.pem.txt -o tc.trust`
 
+
+---
 #### tc.key
 
 We also need an API key from TTN for authorisation by registering the gateway.
@@ -185,11 +202,15 @@ Now that we have the EUI we can head over to the TTN Console for registration.
 
 1. Open a browser on your computer and go to: https://eu1.cloud.thethings.network/console
 2. On the login page login to your account or create a new user by clicking on "Register".
+	>>
 	>> <img src="./pictures/TTNConsole_login.png" alt="" width="100%">
+	>> ---
 	>> <img src="./pictures/TTNConsole_create-user.png" alt="" width="100%">
 3. Once logged in, select "Go to gateways".
+	>>
 	>> <img src="./pictures/TTNConsole_start.png" alt="" width="100%">
 4. If you are a collaborator on any gateways you can see them on this page. To add a new one select "Add gateway" on the top right.
+	>>
 	>> <img src="./pictures/TTNConsole_gateway.png" alt="" width="100%">
 5. Fill in a Gateway ID of your choice. Make sure it is easily identifiable by this name.
 6. Fill in the Gateway EUI.
@@ -203,11 +224,14 @@ Your gateway is now registered, but we still need to get an API key for authoris
 1. In your browser go to: https://eu1.cloud.thethings.network/console/gateways
 2. Select your gateway.
 3. On the "Overview" page, select "API keys" on the left side panel.
+	>>
 	>> <img src="./pictures/TTNConsole_gateway-overview.png" alt="" width="100%">
 4. Click on "Add API key" on the top right to create a new key.
+	>>
 	>> <img src="./pictures/TTNConsole_gateway-apikeys.png" alt="" width="100%">
 5. Give the key a name.
 6. And add at least the following right: "Link as Gateway to a Gateway Server for traffic exchange, i.e. write uplink and read downlink".
+	>>
 	>> <img src="./pictures/TTNConsole_gateway-apikeys-add.png" alt="" width="100%">
 7. Click on "Create API key".
 8. In the following window make sure to copy the key and write it down somewhere. You will not be able to get it later on, though you can always create a new one.
@@ -218,6 +242,8 @@ Now head back over to the Git Bash console and enter the following commands:
 1. `export LNS_KEY="your-API-key-here"`
 2. `echo "Authorization: Bearer $LNS_KEY" | perl -p -e 's/\r\n|\n|\r/\r\n/g' > tc.key`
 
+
+---
 #### station.conf
 
 Finally create the station's configuration file.
@@ -261,6 +287,7 @@ After the gateway works satisfactory you can choose a log level further down the
 
 That concludes the configuration of the gateway.
 
+
 ---
 
 ### Reset
@@ -271,6 +298,9 @@ In this example the Concentrator's reset pin is connected, through a 3rd party a
 This can be different depending on the Concentrator/HAT or adapter you are using, so make sure its the right one.
 If when running Basic Station you get an error concerning the concentrator it is very likely you have the wrong GPIO number.
 We, for instance, had some difficulty with finding the correct one.
+
+
+---
 
 #### reset_lgw.sh
 
@@ -346,12 +376,14 @@ exit 0
 4. To run this file needs root permissions, to add these run: `chmod +x reset_lgw.sh`
 5. Now to perform the reset: `sudo ./reset_lgw.sh start 25`
 
+
 ---
 
 ### Automation and Testing
 
 To make it easier to perform tests and make the Gateway start automatically at boot we can use a start script.
 We are going to use a bash script and make it run at boot using crontab.
+
 
 #### start.sh
 
@@ -377,6 +409,7 @@ apt-get update && apt-get -y upgrade
 
 You can also check if the gateway is connected to TTN in the <a href="https://eu1.cloud.thethings.network/console/gateways">TTN Console's Gateways page</a>.
 
+
 ---
 
 ### Troubleshooting
@@ -398,6 +431,7 @@ Other issues:
 - Correct SPI device (/dev/spidev0.0) specified in the "station.config" file?
 - Does the LoRa concentrator module have enough power?
 
+
 ---
 
 ## Making a backup image of the SD-card
@@ -411,6 +445,7 @@ Thankfully there is another option. It's a tool run on the RPi itself which make
 The tool is called <a href="https://forums.raspberrypi.com/viewtopic.php?p=1528736">Image File Utilities by RonR</a> who posted it on the official Raspberry Pi forums with a small guide.
 You can download it <a href="https://forums.raspberrypi.com/download/file.php?id=53282&sid=95d32f51b85506293ed2bc162b2f42fb">here</a>.
 A short guide and a few changes can be found <a href="https://raspberrypi.stackexchange.com/questions/103990/how-to-backup-shrink-the-image-of-my-working-raspbian-sd-card/103991#103991">here</a> by Milliways.
+
 
 ### Create a backup
 
@@ -427,6 +462,7 @@ A short guide and a few changes can be found <a href="https://raspberrypi.stacke
 
 To make an incremental backup later on you can use: `sudo image-utils/image-backup /mnt/Image/GatewayBackup.img`
 
+
 ### Restoring a backup
 
 You can write the image to an SD-card with you computer using the Raspberry Pi Imager.
@@ -439,6 +475,7 @@ Or you can use the Image File Utilities again to mount the image from the USB-st
 3. When done, run: `sudo umount MountedImages; sudo losetup -d /dev/loop0`
 
 https://behind-the-scenes.net/sharing-a-raspberry-pi-directory-on-a-local-area-network/
+
 
 ---
 
