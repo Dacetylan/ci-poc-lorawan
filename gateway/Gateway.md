@@ -426,14 +426,16 @@ Some errors you might run into:
 	>> The GPIO pin you specified for the reset script could be incorrect, or the reset script itself isn't run.
 	>> Double check the GPIO number and run the reset script manually to pinpoint the problem.
 	>> You can easily run the reset script manually with different GPIO numbers by changing it in the arguments when running the script.
-	
+
+- [AIO:ERRO] [-1] WS connect failed: NET - Failed to get an IP address for the given hostname
+	>> If the gateway can't connect to TTN check the internet connection.
+	>> While working on this project an issue occurred where the RPi was connected to the network and accessible through SSH, but didn't get internet.
+
 Other issues:
 - Is SPI enabled in raspi-config?
 - Correct SPI device (/dev/spidev0.0) specified in the "station.config" file?
 - Does the LoRa concentrator module have enough power?
-- If the gateway can't connect to TTN check the internet connection.
-	>> While working on this project an issue occurred where the RPi was connected to the network and accessible through SSH, but didn't get internet.
-
+	
 
 ---
 
