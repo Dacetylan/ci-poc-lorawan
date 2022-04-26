@@ -185,6 +185,8 @@ Troubleshooting steps we've taken:
 | Power cycling the board         | No difference                                      |
 | Monitoring with an oscilloscope | There was nothing to see other than a lot of noise |
 
+One of these non-functional RN2483 modules has started working again a few days later.
+
 ## Programming the SAMD21 to work with the RN2483
 
 The RN2483 on the PCB is connected to UART0. It works exactly the same way as with arduino nano except without the library.
