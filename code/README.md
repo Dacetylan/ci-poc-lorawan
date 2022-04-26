@@ -83,14 +83,14 @@ The following steps will guide you with registering a new device on TTN
 
 ###### 1.2.1 Connecting the RN2483 and GPS to Arduino Nano
 
-![wiring](/Users/joonastamm/Desktop/scho0ol/2_JAAR/pro_anal/wiring_gps_lora.png)
+![wiring](./pictures/wiring_gps_lora.png)
 
 ###### 1.2.2 programming the Arduino Nano
 
 To interface with the RN2483 [a library](https://github.com/jpmeijers/RN2483-Arduino-Library) was used. This library sends most of the commands needed to connect to TTN automatically. All that was needed to do was input the right keys and format the data you want to send.
 
 The position of the testing circuit was taken from the GPS sensor using the library called [TinyGPS++](http://arduiniana.org/libraries/tinygpsplus/).
-[Example code](https://github.com/jpmeijers/RN2483-Arduino-Library/blob/master/examples/ArduinoUnoNano-basic/ArduinoUnoNano-basic.ino) was used and adapted into the following code: [GPS-lora-tester.ino]().
+[Example code](https://github.com/jpmeijers/RN2483-Arduino-Library/blob/master/examples/ArduinoUnoNano-basic/ArduinoUnoNano-basic.ino) was used and adapted into the following code: [GPS-lora-tester.ino](https://github.com/Dacetylan/ci-poc-lorawan/tree/main/code/code).
 
 Don't forget to replace the value of the variable called "appEui" with the appEUI obtained from TTN.  Also replace the value of the variable called appKey with the appKey obtained from TTN.
 
@@ -132,7 +132,7 @@ The range was tested at the following points.
 
 The area in green is the area that has been tested.
 
-![MAP](/Users/joonastamm/Downloads/map.png)
+![MAP](./pictures/map.png)
 
 ## 2. Troubleshooting the RN2483
 
