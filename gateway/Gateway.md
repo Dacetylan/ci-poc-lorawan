@@ -1,6 +1,8 @@
 # LoRaWAN Gateway
 
-<img src="./pictures/gateway.png" alt="Gateway photo" width="100%">
+<img src="./pictures/gateway_photo_wAntenna.jpg" alt="Gateway photo" width="100%">
+<img src="./pictures/gateway_photo_closed.jpg" alt="Gateway photo" width="100%">
+<img src="./pictures/gateway_photo_open.jpg" alt="Gateway photo" width="100%">
 
 ## Introduction
 
