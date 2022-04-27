@@ -432,6 +432,12 @@ Some errors you might run into:
 - [AIO:ERRO] [-1] WS connect failed: NET - Failed to get an IP address for the given hostname
 	>> If the gateway can't connect to TTN check the internet connection.
 	>> While working on this project an issue occurred where the RPi was connected to the network and accessible through SSH, but didn't get internet.
+	>> We solved this by flashing a new SD-card with the backup image we had made after which the internet worked again.
+	>> We then still got the next arror though.
+
+- [AIO:ERRO] [4] WS upgrade failed with HTTP status code: 401
+	>> This problem, like the previous error, has to do with the connection to TTN.
+	>> We were able to solve this by first removing the tc.trust and tc.key files and adding them again like described in the steps in this guide.
 
 Other issues:
 - Is SPI enabled in raspi-config?
