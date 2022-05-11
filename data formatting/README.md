@@ -596,7 +596,7 @@ It can be found in <a href="https://github.com/DaanDekoningKrekels/ci-poc-code/b
 	}
 ```
 
-<img src="./pictures/TTN payload formatter.png" alt="TTN payload formatter in the console web interface" width="100%">
+<img src="./assets/TTN payload formatter.png" alt="TTN payload formatter in the console web interface" width="100%">
 	
 Version with added data for test purposes:
 
@@ -632,7 +632,7 @@ Version with added data for test purposes:
 
 Now the msg in Node-RED should look like this:
 
-<img src="./pictures/Formatted message.png" alt="Formatted message received in Node-RED" width="50%">
+<img src="./assets/Formatted message.png" alt="Formatted message received in Node-RED" width="50%">
 
 
 ---
@@ -680,7 +680,7 @@ In the Node-RED backend the following will happen:
 
 The complete uplink message in the Node-RED debug window:
 
-<img src="./pictures/Uplink message.png" alt="Uplink message in Node-RED" width="50%">
+<img src="./assets/Uplink message.png" alt="Uplink message in Node-RED" width="50%">
 
 
 ---
@@ -703,8 +703,8 @@ The complete uplink message in the Node-RED debug window:
 	return msg;
 ```
 
-<img src="./pictures/NodeRed function.png" alt="Code example in Node-RED function" width="50%">
-<img src="./pictures/NodeRed function FULL.png" alt="Code example in Node-RED function FULL" width="100%">
+<img src="./assets/NodeRed function.png" alt="Code example in Node-RED function" width="50%">
+<img src="./assets/NodeRed function FULL.png" alt="Code example in Node-RED function FULL" width="100%">
 
 
 ---
@@ -714,5 +714,5 @@ The complete uplink message in the Node-RED debug window:
 
 In the following screenshot you can see the incoming uplink message at the top and the parsed result underneath it.
 
-<img src="./pictures/NodeRed incoming and parsed data.png" alt="Result" width="50%">
-<img src="./pictures/NodeRed incoming and parsed data FULL.png" alt="Result FULL" width="100%">
+<img src="./assets/NodeRed incoming and parsed data.png" alt="Result" width="50%">
+<img src="./assets/NodeRed incoming and parsed data FULL.png" alt="Result FULL" width="100%">

@@ -1,8 +1,8 @@
 # LoRaWAN Gateway
 
-<img src="./pictures/gateway_photo_wAntenna.jpg" alt="Gateway photo" width="100%">
-<img src="./pictures/gateway_photo_closed.jpg" alt="Gateway photo" width="100%">
-<img src="./pictures/gateway_photo_open.jpg" alt="Gateway photo" width="100%">
+<img src="./assets/gateway_photo_wAntenna.jpg" alt="Gateway photo" width="100%">
+<img src="./assets/gateway_photo_closed.jpg" alt="Gateway photo" width="100%">
+<img src="./assets/gateway_photo_open.jpg" alt="Gateway photo" width="100%">
 
 ## Introduction
 
@@ -80,7 +80,7 @@ However be aware this option might not always work due to multiple RPi's connect
 	```
 3. When connecting for the first time on an ip-addres you will be asked if you want to connect. Type `yes` to add the RPi to the list of known hosts.
 
-<img src="./pictures/ssh_fingerprint.png" alt="" width="100%">
+<img src="./assets/ssh_fingerprint.png" alt="" width="100%">
 
 
 #### SSH with ip-addres
@@ -91,14 +91,14 @@ To find it we are using <a href="https://nmap.org/download">Nmap Zenmap GUI</a>.
 1. Plug in the power supply and connect the RPi to a router with an ethernet cable, or if you configured the WiFi it should connect automatically.
 2. On Windows, open `cmd` and run `ipconfig"` to identify what ip-address your computer received and take note.
 	>>
-	>> <img src="./pictures/ipconfig.png" alt="" width="100%">
+	>> <img src="./assets/ipconfig.png" alt="" width="100%">
 3. Open Zenmap.
 4. In the Command line write `nmap -p 22` and the network range your ip-address falls into.
 	>> `-p 22` scan port 22 which is the port used for SSH.
 	>> Example: my computer got ip-address 192.168.100.170
 	>> So the nmap command is: `nmap -p 22 192.168.100.0/24`
 	>>
-	>> <img src="./pictures/nmap.png" alt="" width="50%">
+	>> <img src="./assets/nmap.png" alt="" width="50%">
 5. Identify the RPi in the scan results.
 	>> With the MAC addresses you can identify any RPi's in the network because it starts with the manufacturers identification.
 	>> Zenmap does this for us and says which is a RPi.
@@ -153,13 +153,13 @@ Do note the available options and where they are located in the menu can vary by
 1. Go to the RPi configuration screen: sudo raspi-config
 2. Select 3 Interface Options with the Up/Down keys.
 	>>
-	>> <img src="./pictures/raspi-config_3.png" alt="" width="100%">
+	>> <img src="./assets/raspi-config_3.png" alt="" width="100%">
 3. Select I4 SPI and when promted select "Enable".
 	>>
-	>> <img src="./pictures/raspi-config_I4.png" alt="" width="100%">
+	>> <img src="./assets/raspi-config_I4.png" alt="" width="100%">
 4. Also under 3 Interface Options, select I6 Serial Port.
 	>>
-	>> <img src="./pictures/raspi-config_I6.png" alt="" width="100%">
+	>> <img src="./assets/raspi-config_I6.png" alt="" width="100%">
 5. When prompted answer "No" to disable shell messages, but leave the serial port enabled by answering "Yes" on the second prompt.
 6. Select "Finish" with the Left/Right keys to exit raspi-config.
 
@@ -206,21 +206,21 @@ Now that we have the EUI we can head over to the TTN Console for registration.
 1. Open a browser on your computer and go to: https://eu1.cloud.thethings.network/console
 2. On the login page login to your account or create a new user by clicking on "Register".
 	>>
-	>> <img src="./pictures/TTNConsole_login.png" alt="" width="100%">
+	>> <img src="./assets/TTNConsole_login.png" alt="" width="100%">
 	>> ---
-	>> <img src="./pictures/TTNConsole_create-user.png" alt="" width="100%">
+	>> <img src="./assets/TTNConsole_create-user.png" alt="" width="100%">
 3. Once logged in, select "Go to gateways".
 	>>
-	>> <img src="./pictures/TTNConsole_start.png" alt="" width="100%">
+	>> <img src="./assets/TTNConsole_start.png" alt="" width="100%">
 4. If you are a collaborator on any gateways you can see them on this page. To add a new one select "Add gateway" on the top right.
 	>>
-	>> <img src="./pictures/TTNConsole_gateway.png" alt="" width="100%">
+	>> <img src="./assets/TTNConsole_gateway.png" alt="" width="100%">
 5. Fill in a Gateway ID of your choice. Make sure it is easily identifiable by this name.
 6. Fill in the Gateway EUI.
 7. Fill in a name. This is only as heading in the console.
 8. Scroll down to Frequency plan under LoRaWAN options and select the frequency your end devices/nodes will work on. In this example this is "Europe 863-870 MHz (SF9 for RX2 - recommended)
 9. The other settings can be left on default. Click on "Create gateway" to finish the registration.
-	>> <img src="./pictures/TTNConsole_gateway-add.png" alt="" width="100%">
+	>> <img src="./assets/TTNConsole_gateway-add.png" alt="" width="100%">
 
 Your gateway is now registered, but we still need to get an API key for authorisation.
 
@@ -228,17 +228,17 @@ Your gateway is now registered, but we still need to get an API key for authoris
 2. Select your gateway.
 3. On the "Overview" page, select "API keys" on the left side panel.
 	>>
-	>> <img src="./pictures/TTNConsole_gateway-overview.png" alt="" width="100%">
+	>> <img src="./assets/TTNConsole_gateway-overview.png" alt="" width="100%">
 4. Click on "Add API key" on the top right to create a new key.
 	>>
-	>> <img src="./pictures/TTNConsole_gateway-apikeys.png" alt="" width="100%">
+	>> <img src="./assets/TTNConsole_gateway-apikeys.png" alt="" width="100%">
 5. Give the key a name.
 6. And add at least the following right: "Link as Gateway to a Gateway Server for traffic exchange, i.e. write uplink and read downlink".
 	>>
-	>> <img src="./pictures/TTNConsole_gateway-apikeys-add.png" alt="" width="100%">
+	>> <img src="./assets/TTNConsole_gateway-apikeys-add.png" alt="" width="100%">
 7. Click on "Create API key".
 8. In the following window make sure to copy the key and write it down somewhere. You will not be able to get it later on, though you can always create a new one.
-	>> <img src="./pictures/TTNConsole_gateway-apikeys-copy.png" alt="" width="100%">
+	>> <img src="./assets/TTNConsole_gateway-apikeys-copy.png" alt="" width="100%">
 
 Now head back over to the Git Bash console and enter the following commands:
 
