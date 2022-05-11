@@ -490,7 +490,31 @@ Lastly this are code examples used in the project.
 	myLora.txBytes(payload, sizeof(payload));
 	delay(200);
 ```
-	
+
+
+### PoC PCB code
+
+The following is the code used in the current PoC prototype, at time of writing.
+It is code written for the ATSAMD21G16B microcontroller and the RN2483 LoRa module.
+It can be found in <a href="https://github.com/DaanDekoningKrekels/ci-poc-code/blob/main/RN2483.c">file RN2483.c in the ci-poc-code repository</a>.
+
+```c
+	void RN2483_send(uint8_t *data) {
+		char msgBuffer[4*2 + 1];
+		char buffer[3];
+		for (unsigned i=0; i<4; i++) {
+			sprintf(buffer, "%02X", data[i]);
+			memcpy(&msgBuffer[i*2], &buffer, sizeof(buffer));
+		}
+		UART0_write("mac tx uncnf 1 ", 0);
+		delay_ms(200);
+		UART0_write(msgBuffer, 0);
+		delay_ms(200);
+		UART0_write("\r\n", 1);
+		delay_ms(200);
+	}
+```
+
 
 ### TTN Formatter
 
