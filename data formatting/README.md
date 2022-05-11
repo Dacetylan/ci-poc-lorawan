@@ -150,6 +150,9 @@ Below are all the measurements that the sensor will perform summed up.
 </table>
 
 
+---
+
+
 ## Node/Sensor Info
 
 The network node or sensor will also need to be identifiable.
@@ -238,6 +241,7 @@ More info on TTN API can be found <a href="https://www.thethingsindustries.com/d
 	
 
 ---
+
 
 ## Data structure
 
@@ -443,6 +447,7 @@ The incoming data from a node/sensor.
 
 
 ---
+
 
 ## Code
 
