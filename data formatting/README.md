@@ -15,6 +15,7 @@ Outlined in this document are the ways it is done in this project.
 
 
 ---
+---
 
 
 ## Measurements
@@ -135,25 +136,25 @@ Below are all the measurements that the sensor will perform summed up.
 		<td>
 			<ul>
 				<li><b>eCO2:</b></li>
-					<lu>
+					<ul>
 						<li>400 to 32768 ppm</li>
-					</lu>
+					</ul>
 				<li><b>eTVOC:</b></li>
-					<lu>
+					<ul>
 						<li>0 tot 29206 ppb</li>
-					</lu>
+					</ul>
 			</ul>
 		</td>
 		<td>
 			<ul>
 				<li><b>eCO2:</b></li>
-					<lu>
+					<ul>
 						<li>unsigned int / uint16_t</li>
-					</lu>
+					</ul>
 				<li><b>eTVOC:</b></li>
-					<lu>
+					<ul>
 						<li>unsigned int / uint16_t</li>
-					</lu>
+					</ul>
 			</ul>
 		</td>
 	</tr>
@@ -166,7 +167,8 @@ Below are all the measurements that the sensor will perform summed up.
 			Analog read value from 0 to 1023
 		</td>
 		<td>
-			0 to 1023 (salinity is expressed as 0 to 28%)
+			0 to 1023<br>
+			(salinity is expressed as 0 to 28%)
 		</td>
 		<td>
 			unsigned int / uint16_t
@@ -189,6 +191,7 @@ Below are all the measurements that the sensor will perform summed up.
 </table>
 
 
+---
 ---
 
 
@@ -285,6 +288,7 @@ The following info is what is important.
 More info on TTN API can be found <a href="https://www.thethingsindustries.com/docs/reference/api/end_device/">here</a>.
 	
 
+---
 ---
 
 
@@ -477,7 +481,7 @@ The incoming data from a node/sensor.
 		name: string,
 		latitude: float,
 		longitude: float,
-		datetime: string,	 (ISO 8601 YYYY-MM-DDTHH:mm:ss.sssZ)
+		datetime: string,
 		pm25: integer,
 		pm10: integer,
 		temp: byte,
@@ -491,6 +495,7 @@ The incoming data from a node/sensor.
 ```
 
 
+---
 ---
 
 
@@ -541,6 +546,8 @@ Lastly this are code examples used in the project.
 	delay(200);
 ```
 
+---
+
 
 ### PoC PCB code
 
@@ -565,6 +572,7 @@ It can be found in <a href="https://github.com/DaanDekoningKrekels/ci-poc-code/b
 	}
 ```
 
+---
 
 ### TTN Formatter
 
@@ -625,7 +633,10 @@ Version with added data for test purposes:
 Now the msg in Node-RED should look like this:
 
 <img src="./pictures/Formatted message.png" alt="Formatted message received in Node-RED" width="50%">
-	
+
+
+---
+
 
 ### Node-RED
 
@@ -671,6 +682,9 @@ The complete uplink message in the Node-RED debug window:
 
 <img src="./pictures/Uplink message.png" alt="Uplink message in Node-RED" width="50%">
 
+
+---
+
 				 
 #### Code
 
@@ -691,6 +705,9 @@ The complete uplink message in the Node-RED debug window:
 
 <img src="./pictures/NodeRed function.png" alt="Code example in Node-RED function" width="50%">
 <img src="./pictures/NodeRed function FULL.png" alt="Code example in Node-RED function FULL" width="100%">
+
+
+---
 
 
 #### Result
