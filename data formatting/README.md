@@ -223,15 +223,8 @@ The following info is what is important.
 			Payload msg (if triangulated) and API
 		</td>
 		<td>
-			```javascript
-				locations: {
-					frm-payload: {
-							latitude: -6.220360548375914,
-							longitude: 39.21113847179748
-						}
-					}
-				},
-			```
+			latitude: -6.220360548375914,
+			longitude: 39.21113847179748
 		</td>
 	</tr>
 	</tr>
