@@ -42,6 +42,7 @@ In Windows you can use the build in Windows PowerShell console or the above ment
 
 ---
 
+
 ## Setting up the Raspberry Pi
 
 ### Using the Raspberry Pi Imager tool flash the OS to the microSD-card.
@@ -120,6 +121,7 @@ To do this type the following command: `sudo apt-get update && sudo apt-get -y u
 
 ---
 
+
 ## Configuring the Gateway
 
 To configure the RPi as a gateway we are using a IMST iC880A LoRaWAN Concentrator and The Things Network.
@@ -172,6 +174,8 @@ To keep them together create a new folder called TTN in the home directory.
 
 
 ---
+
+
 #### tc.uri
 
 The first thing Basic Station needs to know is which LNS to connect with.
@@ -187,6 +191,8 @@ To create the file:
 
 
 ---
+
+
 #### tc.trust
 
 Next we need to establish a trust relationship. This involves copying the root certificate (expires Jun 2035) to a file called tc.trust.
@@ -195,6 +201,8 @@ Next we need to establish a trust relationship. This involves copying the root c
 
 
 ---
+
+
 #### tc.key
 
 We also need an API key from TTN for authorisation by registering the gateway.
@@ -247,6 +255,8 @@ Now head back over to the Git Bash console and enter the following commands:
 
 
 ---
+
+
 #### station.conf
 
 Finally create the station's configuration file.
@@ -293,6 +303,7 @@ That concludes the configuration of the gateway.
 
 ---
 
+
 ### Reset
 
 The Concentrator we are using makes use of the SX1301 Digital Baseband chip.
@@ -304,6 +315,7 @@ We, for instance, had some difficulty with finding the correct one.
 
 
 ---
+
 
 #### reset_lgw.sh
 
@@ -382,6 +394,7 @@ exit 0
 
 ---
 
+
 ### Automation and Testing
 
 To make it easier to perform tests and make the Gateway start automatically at boot we can use a start script.
@@ -415,6 +428,7 @@ You can also check if the gateway is connected to TTN in the <a href="https://eu
 
 ---
 
+
 ### Troubleshooting
 
 Some errors you might run into:
@@ -447,6 +461,7 @@ Other issues:
 
 ---
 
+
 ## Making a backup image of the SD-card
 
 In case something goes wrong or the SD-card gets damaged by a power outage it can be very time consuming to have the reconfigure the gateway from scratch again.
@@ -478,6 +493,8 @@ To make an incremental backup later on you can use: `sudo image-utils/image-back
 
 ### Restoring a backup
 
+Our backups can be found <a href="https://apbe-my.sharepoint.com/personal/s120267_ap_be/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fs120267%5Fap%5Fbe%2FDocuments%2FZanzibar%20gateway%20backups&ga=1">here</a>.
+
 You can write the image to an SD-card with you computer using the Raspberry Pi Imager.
 Click on "Choose OS", scroll to the bottom, select "Use own file" and navigate to the .img or .img.gzip file. Both work.
 
@@ -487,10 +504,10 @@ Or you can use the Image File Utilities again to mount the image from the USB-st
 2. Mount backup: `sudo image-utils/image-mount /mnt/Image/GatewayBackup.img  MountedImages`
 3. When done, run: `sudo umount MountedImages; sudo losetup -d /dev/loop0`
 
-https://behind-the-scenes.net/sharing-a-raspberry-pi-directory-on-a-local-area-network/
 
 
 ---
+
 
 ## Troubleshooting when the Gateway gets disconnected.
 
@@ -514,6 +531,7 @@ To check remotely:
 
 
 ---
+
 
 ## Sources
 - <a href="https://www.beyondlogic.org/lorawan-upgrading-to-basic-station-and-the-things-network-v3-stack/">LoRaWAN: Upgrading to Basic Station and The Things Network V3 Stack by Craig Peacock</a>
