@@ -23,10 +23,10 @@ Below are all the measurements that the sensor will perform summed up.
 
 <table style="width: 100%">
 	<colgroup>
-		<col span="1" style="width: 15%;">
+		<col span="1" style="width: 13%;">
 		<col span="2" style="width: 30%;">
-		<col span="3" style="width: 40%;">
-		<col span="4" style="width: 25%;">
+		<col span="3" style="width: 47%;">
+		<col span="4" style="width: 20%;">
 	</colgroup>
 	<tr>
 		<th>Sensor</th>
@@ -49,14 +49,14 @@ Below are all the measurements that the sensor will perform summed up.
 		</td>
 		<td>
 			<ul>
-				<li><b>PM2.5</b></li>
+				<li><b>PM2.5:</b></li>
 					<ul>
 						<li>0 to 999 μg/m³ PWM Output</li>
 						<li>byte 2 = DATA 1 = PM2.5 Low byte</li>
 						<li>byte 3 = DATA 2 = PM2.5 High byte</li>
 						<li>value = ((PM2.5 High byte *256) + PM2.5 Low byte) / 10</li>
 					</ul>
-				<li><b>PM10</b></li>
+				<li><b>PM10:</b></li>
 					<ul>
 						<li>0 to 999 μg/m³ PWM Output</li>
 						<li>byte 4 = DATA 3 = PM10 Low byte</li>
@@ -67,54 +67,93 @@ Below are all the measurements that the sensor will perform summed up.
 			</ul>
 		</td>
 		<td>
-			PM2.5: unsigned int / uint16_t
-			PM10:  unsigned int / uint16_t
+			<ul>
+				<li><b>PM2.5:</b></li>
+					<ul>
+						<li>unsigned int / uint16_t</li>
+					</ul>
+				<li><b>PM10:</b></li>
+					<ul>
+						<li>unsigned int / uint16_t</li>
+					</ul>
+			</ul>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			Bosch Sensortec BME280
+			Bosch Sensortec BME280<br>
 			Temperature, Pressure and Humidity.
 		</td>
 		<td>
-			I²C
-			address 0x76 or 0x77
-			<a href="https://github.com/BoschSensortec/BME280_driver">API</a>
+			I²C<br>
+			address 0x76 or 0x77<br>
+			<a href="https://github.com/BoschSensortec/BME280_driver">API</a><br>
 			Burst read all data at once: register 0xF7 to 0xFE = temperature + pressure + humidity
 		</td>
 		<td>
 			<ul>
-				<li>Temperature: -40 to 85°C</li>
-				<li>Pressure: 300 to 1100 hPa</li>
-				<li>Humidity: 0 to 100% relative humidity</li>
+				<li><b>Temperature:</b></li>
+					<ul>
+						<li>-40 to 85°C</li>
+					</ul>
+				<li><b>Pressure:</b></li>
+					<ul>
+						<li>300 to 1100 hPa</li>
+					</ul>
+				<li><b>Humidity:</b></li>
+					<ul>
+						<li>0 to 100% relative humidity</li>
+					</ul>
 			</ul>
 		</td>
 		<td>
 			<ul>
-				<li>Temperature: byte</li>
-				<li>Pressure: unsigned int / uint16_t</li>
-				<li>Humidity: byte</li>
+				<li><b>Temperature:</b></li>
+					<ul>
+						<li>byte</li>
+					</ul>
+				<li><b>Pressure:</b></li>
+					<ul>
+						<li>unsigned int / uint16_t</li>
+					</ul>
+				<li><b>Humidity:</b></li>
+					<ul>
+						<li>byte</li>
+					</ul>
 			</ul>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			ScioSense CCS811
-			eCO2 = equivalent CO2 and eTVOC = equivelant Total Volatile Organic Compound
+			ScioSense CCS811<br>
+			eCO2 = equivalent CO2<br>
+			and eTVOC = equivelant Total Volatile Organic Compound
 		</td>
 		<td>
 			(Protocol)
 		</td>
 		<td>
 			<ul>
-				<li>eCO2: 400 to 32768 ppm</li>
-				<li>eTVOC: 0 tot 29206 ppb</li>
+				<li><b>eCO2:</b></li>
+					<lu>
+						<li>400 to 32768 ppm</li>
+					</lu>
+				<li><b>eTVOC:</b></li>
+					<lu>
+						<li>0 tot 29206 ppb</li>
+					</lu>
 			</ul>
 		</td>
 		<td>
 			<ul>
-				<li>eCO2: unsigned int / uint16_t</li>
-				<li>eTVOC: unsigned int / uint16_t</li>
+				<li><b>eCO2:</b></li>
+					<lu>
+						<li>unsigned int / uint16_t</li>
+					</lu>
+				<li><b>eTVOC:</b></li>
+					<lu>
+						<li>unsigned int / uint16_t</li>
+					</lu>
 			</ul>
 		</td>
 	</tr>
@@ -214,16 +253,29 @@ The following info is what is important.
 	</tr>
 	<tr>
 		<td>
-			Location (latitude, longitude)
+			latitude
 		</td>
 		<td>
-			(float, float)
+			float
 		</td>
 		<td>
 			Payload msg (if triangulated) and API
 		</td>
 		<td>
-			latitude: -6.220360548375914,
+			latitude: -6.220360548375914
+		</td>
+	</tr>
+	<tr>
+		<td>
+			longitude
+		</td>
+		<td>
+			float
+		</td>
+		<td>
+			Payload msg (if triangulated) and API
+		</td>
+		<td>
 			longitude: 39.21113847179748
 		</td>
 	</tr>
