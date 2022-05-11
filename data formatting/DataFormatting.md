@@ -13,37 +13,6 @@ Outlined in this document are the ways it is done in this project.
 	Note: at time of writing, the end of Zanzibar 2022, our current PoC PCB sensor only measures and send data from the Salinity sensor. The formatter in the TTN application then reformats the data and fills in 0 for all other measurements so no errors occur in the backend. There is also a problem with the location not being included in the payload msg from the PoC. This still needs to be addressed. A possible solution would be to manually add the location in the TTN application and retrieve if into the backend with the use of the TTN API currently used to build the nodes in Node-RED.
 </i></b>
 
-<table style="width: 100%">
-	<colgroup>
-		<col span="1" style="width: 15%;">
-		<col span="2" style="width: 30%;">
-		<col span="3" style="width: 40%;">
-		<col span="4" style="width: 25%;">
-	</colgroup>
-	<tr>
-		<th>Sensor</th>
-		<th>Read method</th>
-		<th>Output</th>
-		<th>Datatype</th>
-	</tr>
-	<tr>
-		<td>
-			Name
-			Type
-		</td>
-		<td>
-			Protocol
-		</td>
-		<td>
-			<ul>
-				<li></li>
-			</ul>
-		</td>
-		<td>
-			Datatype
-		</td>
-	</tr>
-</table>
 
 ---
 
