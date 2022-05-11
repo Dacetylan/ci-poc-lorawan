@@ -6,6 +6,7 @@ Documentation for the Lorawan gateway can be found here. The documentation for c
 | ------------- | ------ |
 | Gateway       | [documentation](https://github.com/Dacetylan/ci-poc-lorawan/tree/main/gateway)   |
 | Prototype          |    [documentation](https://github.com/Dacetylan/ci-poc-lorawan/tree/main/code)    |
+| Data Formatting | [documentation](https://github.com/Dacetylan/ci-poc-lorawan/tree/main/data%20formatting) |
 
 ​
 
