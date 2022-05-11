@@ -36,7 +36,7 @@ Below are all the measurements that the sensor will perform summed up.
 	</tr>
 	<tr>
 		<td>
-			Nova SDS011
+			Nova SDS011<br>
 			Particulate matter
 		</td>
 		<td>
